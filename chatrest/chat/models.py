@@ -22,7 +22,7 @@ class Chat(models.Model):
         default=DIALOG
     )
     theme = models.CharField(max_length=256, blank=True)
-    members = models.ManyToManyField(Profile)
+    members = models.ManyToManyField(User)
 
 
 # Сообщение в чате

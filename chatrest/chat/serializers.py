@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 
 from rest_framework import serializers, viewsets
 
+from .models import Chat, Message
+
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -16,3 +18,12 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
+class ChatSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Chat
+        fields = ['type', 'theme', 'members']
+
+
+class ChatViewSet(viewsets.ModelViewSet):
+    queryset = Chat.objects.all()
+    serializer_class = ChatSerializer
