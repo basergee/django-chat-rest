@@ -1,7 +1,15 @@
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth.views import LoginView, LogoutView
 
+from rest_framework import routers
+
 from .views import UserSignupView
+from .serializers import UserViewSet
+
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
 
 
 urlpatterns = [
@@ -12,4 +20,5 @@ urlpatterns = [
          name='logout'),
     path('signup/', UserSignupView.as_view(), name='signup'),
     # path('profile/', UserProfileView.as_view(), name='profile'),
+    path('', include(router.urls)),
 ]
