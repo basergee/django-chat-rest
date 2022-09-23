@@ -3,7 +3,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 
 from rest_framework import routers
 
-from .views import UserSignupView, IndexView
+from .views import UserSignupView, IndexView, room
 from .serializers import UserViewSet, ChatViewSet
 
 
@@ -22,4 +22,5 @@ urlpatterns = [
     path('signup/', UserSignupView.as_view(), name='signup'),
     # path('profile/', UserProfileView.as_view(), name='profile'),
     path('', include(router.urls)),
+    path('<str:room_name>/', room, name='room'),
 ]

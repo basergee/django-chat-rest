@@ -1,3 +1,4 @@
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.views.generic import CreateView, TemplateView
@@ -14,3 +15,9 @@ class UserSignupView(CreateView):
 
 class IndexView(TemplateView):
     template_name = "chat/index.html"
+
+
+def room(request, room_name):
+    return render(request, 'chat/room.html', {
+        'room_name': room_name
+    })
