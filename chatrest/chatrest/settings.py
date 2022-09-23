@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'channels',
 
     'chat',
 ]
@@ -72,6 +73,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'chatrest.wsgi.application'
+ASGI_APPLICATION = "chatrest.asgi.application"
 
 
 # Database
