@@ -2,10 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+
+    {% load static %}
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
 </head>
 <body>
-{% block content %}
-{% endblock content %}
+    <div class="header">
+        <div class="nav">
+            <ul>
+                <div>
+                    <li class="hobby_title"><a>Django-chat</a></li>
+                </div>
+                {% block header_nav %}
+                    {% if user.is_authenticated %}
+                        <li><a class="active" href="/chat/">Чаты</a></li>
+                    {% else %}
+                        <li><a class="active" href="{% url 'login' %}">Войти</a></li>
+                        <li><a href="{% url 'signup' %}">Регистрация</a></li>
+                    {% endif %}
+                {% endblock header_nav %}
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        {% block content %}
+        {% endblock content %}
+    </div>
 </body>
 </html>

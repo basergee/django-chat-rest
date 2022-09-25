@@ -1,5 +1,14 @@
 {% extends "default.html" %}
 
+{% block header_nav %}
+    {% if user.is_authenticated %}
+        <li><a class="active" href="/chat/">Чаты</a></li>
+    {% else %}
+        <li><a href="{% url 'login' %}">Войти</a></li>
+        <li><a class="active" href="{% url 'signup' %}">Регистрация</a></li>
+    {% endif %}
+{% endblock %}
+
 {% block content %}
 <h2> Войти в систему </h2>
 <form method="post">
