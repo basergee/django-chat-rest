@@ -1,5 +1,9 @@
 {% extends "default.html" %}
 
+{% block title %}
+Регистрация
+{% endblock %}
+
 {% block header_nav %}
     {% if user.is_authenticated %}
         <li><a class="active" href="/chat/">Чаты</a></li>
