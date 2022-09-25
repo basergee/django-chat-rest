@@ -74,6 +74,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'chatrest.wsgi.application'
 ASGI_APPLICATION = "chatrest.asgi.application"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 
 # Database
