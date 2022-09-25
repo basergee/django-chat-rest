@@ -5,10 +5,31 @@ Chat Rooms
 {% endblock %}
 
 {% block content %}
-    <textarea id="chat-log" cols="100" rows="20"></textarea><br>
-    <input id="chat-message-input" type="text" size="100"><br>
-    <input id="chat-message-submit" type="button" value="Send">
-    {{ room_name|json_script:"room-name" }}
+    <div class="room_title">
+        Room Title{{ room_name|json_script:"room-name" }}
+    </div>
+    <div class="messages_area" id="messages_area">
+        <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+        <div class="user_message">
+            <p class="user_name">Username</p>
+            <p>Message text from the user</p>
+        </div>
+
+        <div class="user_message">
+            <p>Username</p>
+            <p>Message text from the user</p>
+        </div>
+
+        <div class="user_message">
+            <p>Username</p>
+            <p>Message text from the user</p>
+        </div>
+    </div>
+    <div class="message_input">
+        <input id="chat-message-input" type="text" size="100"><br>
+        <input id="chat-message-submit" type="button" value="Send">
+    </div>
+
     <script>
         const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
