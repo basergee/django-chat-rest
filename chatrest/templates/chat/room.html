@@ -32,6 +32,7 @@ Chat Rooms
 {% endblock content %}
 
 {% block scripts %}
+<script>
     const roomName = JSON.parse(document.getElementById('room-name').textContent);
 
     const chatSocket = new WebSocket(
@@ -66,4 +67,5 @@ Chat Rooms
         }));
         messageInputDom.value = '';
     };
+</script>
 {% endblock %}
