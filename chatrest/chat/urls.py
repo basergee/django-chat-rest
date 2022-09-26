@@ -4,13 +4,13 @@ from django.contrib.auth.views import LoginView, LogoutView
 from rest_framework import routers
 
 from .views import UserSignupView, IndexView, room
-from .serializers import UserViewSet, ChatViewSet
+from .serializers import UserViewSet, RoomViewSet
 
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
-router.register(r'chats', ChatViewSet)
+router.register(r'rooms', RoomViewSet)
 
 
 urlpatterns = [
