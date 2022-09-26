@@ -6,7 +6,7 @@ Chat Rooms
 
 {% block content %}
     <div class="room_title">
-        Room Title{{ room_name|json_script:"room-name" }}
+        Room Title
     </div>
     <div class="messages_area" id="messages_area">
         <textarea id="chat-log" cols="100" rows="20"></textarea><br>
@@ -32,8 +32,11 @@ Chat Rooms
 {% endblock content %}
 
 {% block scripts %}
+{{ room_name|json_script:"room-name" }}
+{{ request.user.username|json_script:"json-username" }}
 <script>
     const roomName = JSON.parse(document.getElementById('room-name').textContent);
+    const userName = JSON.parse(document.getElementById('json-username').textContent);
 
     const chatSocket = new WebSocket(
         'ws://'
@@ -45,7 +48,15 @@ Chat Rooms
 
     chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
-        document.querySelector('#chat-log').value += (data.message + '\n');
+        if (data.message) {
+            let html = '<div class="user_message">';
+            html += '<p class="user_name">' + data.username + '</p>';
+            html += '<p>' + data.message + '</p>';
+            html += '</div>'
+            document.querySelector('#messages_area').innerHTML += html;
+        } else {
+            alert('Empty message');
+        }
     };
 
     chatSocket.onclose = function(e) {
@@ -63,7 +74,9 @@ Chat Rooms
         const messageInputDom = document.querySelector('#chat-message-input');
         const message = messageInputDom.value;
         chatSocket.send(JSON.stringify({
-            'message': message
+            'message': message,
+            'username': userName,
+            'room': roomName
         }));
         messageInputDom.value = '';
     };
