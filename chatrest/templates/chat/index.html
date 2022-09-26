@@ -5,9 +5,20 @@ Chat Rooms
 {% endblock %}
 
 {% block content %}
-    What chat room would you like to enter?<br>
-    <input id="room-name-input" type="text" size="100"><br>
-    <input id="room-name-submit" type="button" value="Enter">
+    {% if user.is_authenticated %}
+        <div class="rooms_list">
+            {% for room in rooms %}
+                <div class="room_list_element">
+                    {{room.title}}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div>
+            <p>Добро пожаловать в Django-chat-rest!</p>
+            <p>Войдите или зарегистрируйтесь, чтобы продолжить</p>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block scripts %}
