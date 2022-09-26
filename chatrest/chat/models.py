@@ -8,26 +8,25 @@ class Profile(models.Model):
     avatar = models.FileField(upload_to='uploads/', blank=True)
 
 
-class Chat(models.Model):
-    DIALOG = 'D'
-    GROUP = 'G'
-    CHAT_TYPE_CHOICES = (
-        (DIALOG, 'Личные сообщения'),
-        (GROUP, 'Групповой чат')
-    )
+class Room(models.Model):
+    name = models.CharField(max_length=255, null=False, blank=False,
+                            unique=True)
+    host = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name="rooms")
+    current_users = models.ManyToManyField(User, related_name="current_rooms",
+                                           blank=True)
 
-    type = models.CharField(
-        max_length=1,
-        choices=CHAT_TYPE_CHOICES,
-        default=DIALOG
-    )
-    theme = models.CharField(max_length=256, blank=True)
-    members = models.ManyToManyField(User)
+    def __str__(self):
+        return f"Room({self.name} {self.host})"
 
 
-# Сообщение в чате
 class Message(models.Model):
-    chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
-    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    content = models.TextField()
-    creation_time = models.DateTimeField(auto_now_add=True)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE,
+                             related_name="messages")
+    text = models.TextField(max_length=500)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name="messages")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Message({self.user} {self.room})"
