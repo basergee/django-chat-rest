@@ -7,11 +7,16 @@ Chat Rooms
 {% block content %}
     {% if user.is_authenticated %}
         <div class="rooms_list">
-            {% for room in rooms %}
-                <div class="room_list_element">
-                    {{room.title}}
-                </div>
-            {% endfor %}
+            <h1>Список комнат</h1>
+            {% if rooms %}
+                {% for room in rooms %}
+                    <div class="room_list_element">
+                        <a href="/{{room.name}}">{{room.name}}</a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h2>Комнат нет!</h2>
+            {% endif %}
         </div>
     {% else %}
         <div>
