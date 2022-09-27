@@ -10,8 +10,8 @@ Chat Rooms
     </div>
     <div class="messages_area" id="messages_area">
         <div class="user_message">
+            <p class="bubble speech">Message text from the user</p>
             <p class="user_name">Username</p>
-            <p>Message text from the user</p>
         </div>
     </div>
     <div class="message_input">
@@ -39,8 +39,8 @@ Chat Rooms
         const data = JSON.parse(e.data);
         if (data.message) {
             let html = '<div class="user_message">';
+            html += '<p class="bubble speech">' + data.message + '</p>';
             html += '<p class="user_name">' + data.username + '</p>';
-            html += '<p>' + data.message + '</p>';
             html += '</div>'
             document.querySelector('#messages_area').innerHTML += html;
         } else {
