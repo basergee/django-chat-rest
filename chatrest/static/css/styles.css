@@ -1,43 +1,9 @@
-.contacts {
-    padding: 100px;
-    font-size: 40px;
-}
-
-.contacts .tel {
-  background-color: green
-}
-
-.contacts .email {
-  background-color: gray
-}
-
-.contacts .social {
-  background-color: pink
-}
-
-img {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    width: 400px;
-    float: left;
-}
-
 .content {
     font-family: "Arial";
     font-size: 20pt;
     text-align: justify;
     float: center;
 }
-
-.about p {
-    font-size: 15pt;
-}
-
-.about img {
-    border-radius: 50%;
-}
-
 
 .nav ul {
   list-style-type: none;
