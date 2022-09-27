@@ -27,7 +27,7 @@ img {
     font-family: "Arial";
     font-size: 20pt;
     text-align: justify;
-    float: right;
+    float: center;
 }
 
 .about p {
