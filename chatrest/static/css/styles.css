@@ -33,11 +33,11 @@
   background-color: #04AA6D;
 }
 
-.nav .hobby_title {
+.nav .project_title {
     float: left;
 }
 
-.nav .hobby_title a:hover:not(.active) {
+.nav .project_title a:hover:not(.active) {
     background-color: #333;
 }
 
