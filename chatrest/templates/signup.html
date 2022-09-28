@@ -6,12 +6,15 @@
 
 {% block header_nav %}
     {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">Выйти</a></li>
+        <li><a href="/profile/{{ user.pk }}">Профиль</a></li>
         <li><a class="active" href="/chat/">Чаты</a></li>
     {% else %}
         <li><a href="{% url 'login' %}">Войти</a></li>
         <li><a class="active" href="{% url 'signup' %}">Регистрация</a></li>
+        <li><a href="{% url 'index' %}">Главная</a></li>
     {% endif %}
-{% endblock %}
+{% endblock header_nav %}
 
 {% block content %}
 <h2> Войти в систему </h2>
