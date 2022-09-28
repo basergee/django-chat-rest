@@ -5,18 +5,31 @@ Chat Rooms
 {% endblock %}
 
 {% block content %}
-    <div class="room_title">
-        <h1>Комната "{{room_name}}"</h1>
-    </div>
-    <div class="messages_area" id="messages_area">
-        <div class="user_message">
-            <p class="bubble speech">Message text from the user</p>
-            <p class="user_name">Username</p>
+    <div class="wrap">
+        <div class="floatleft">
+            <div class="room_title">
+                <h1>Комната "{{room_name}}"</h1>
+            </div>
+            <div class="messages_area" id="messages_area">
+                <div class="user_message">
+                    <p class="bubble speech">Message text from the user</p>
+                    <p class="user_name">Username</p>
+                </div>
+            </div>
+            <div class="message_input">
+                <input id="chat-message-input" type="text" size="100"><br>
+                <input id="chat-message-submit" type="button" value="Send">
+            </div>
         </div>
-    </div>
-    <div class="message_input">
-        <input id="chat-message-input" type="text" size="100"><br>
-        <input id="chat-message-submit" type="button" value="Send">
+        <div class="floatright">
+            <div class="room_title">
+                <h1>Участники</h1>
+            </div>
+            <div class="members_area" id="members_area">
+
+            </div>
+        </div>
+        <div style="clear: both;"></div>
     </div>
 {% endblock content %}
 
