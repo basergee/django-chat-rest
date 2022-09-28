@@ -8,7 +8,7 @@ Chat Rooms
     <div class="wrap">
         <div class="floatleft">
             <div class="room_title">
-                <h1>Комната "{{room_name}}"</h1>
+                <h1>Комната "{{room.name}}"</h1>
             </div>
             <div class="messages_area" id="messages_area">
                 <div class="user_message">
@@ -26,7 +26,10 @@ Chat Rooms
                 <h1>Участники</h1>
             </div>
             <div class="members_area" id="members_area">
-
+                <p>Владелец: {{room.host}}</p>
+                {% for m in members %}
+                    <p>{{m.username}}</p>
+                {% endfor %}
             </div>
         </div>
         <div style="clear: both;"></div>
@@ -34,7 +37,7 @@ Chat Rooms
 {% endblock content %}
 
 {% block scripts %}
-{{ room_name|json_script:"room-name" }}
+{{ room.name|json_script:"room-name" }}
 {{ request.user.username|json_script:"json-username" }}
 <script>
     const roomName = JSON.parse(document.getElementById('room-name').textContent);

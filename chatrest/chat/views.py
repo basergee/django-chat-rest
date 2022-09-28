@@ -28,8 +28,11 @@ class IndexView(TemplateView):
 @login_required
 def room(request, room_name):
     if Room.objects.filter(name=room_name).exists():
+        room = Room.objects.get(name=room_name)
         return render(request, 'chat/room.html', {
-            'room_name': room_name
+            'room': room,
+            # 'room_name': room_name,
+            'members': room.current_users.all(),
         })
     else:
         return HttpResponseNotFound(f'<h1>Комнаты c именем \"{room_name}\" '
