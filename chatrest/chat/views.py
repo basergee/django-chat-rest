@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.views.generic import CreateView, TemplateView
 from django.http import HttpResponseNotFound
+from django.contrib.auth.decorators import login_required
 
 from .forms import UserSignupForm
 from .models import Room
@@ -24,6 +25,7 @@ class IndexView(TemplateView):
         return context
 
 
+@login_required
 def room(request, room_name):
     if Room.objects.filter(name=room_name).exists():
         return render(request, 'chat/room.html', {
