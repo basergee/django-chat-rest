@@ -20,6 +20,7 @@
                 {% block header_nav %}
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'logout' %}">Выйти</a></li>
+                        <li><a href="/profile/{{ user.pk }}">Профиль</a></li>
                         <li><a class="active" href="/chat/">Чаты</a></li>
                     {% else %}
                         <li><a class="active" href="{% url 'login' %}">Войти</a></li>

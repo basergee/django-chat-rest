@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import CreateView, TemplateView, UpdateView
 from django.http import HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import (LoginRequiredMixin,
+                                        UserPassesTestMixin)
 
-from .forms import UserSignupForm
+from .forms import UserSignupForm, UserEditForm
 from .models import Room
 
 
@@ -37,3 +39,26 @@ def room(request, room_name):
     else:
         return HttpResponseNotFound(f'<h1>Комнаты c именем \"{room_name}\" '
                                     f'не существует</h1>')
+
+
+class UserEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = User
+    form_class = UserEditForm
+    template_name = 'profile.html'
+    success_url = reverse_lazy('index')
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['is_not_author'] = not self.request.user.groups.filter(
+    #         name='authors').exists()
+    #     return context
+
+    # Запрещаем авторизованному пользователю просматривать и править профили
+    # других пользователей. Без этого пользователь мог указать ключ другого
+    # пользователя в url и получить доступ к его профилю
+    # Путь к странице имеет вид: /chat/profile/5/, где 5 -- это ключ в
+    # базе пользователей. Авторизованный пользователь должен иметь доступ
+    # только к своему профилю. Если он пробует получить доступ к чужому,
+    # то будет ошибка '403 Forbidden'
+    def test_func(self):
+        return int(self.request.path.split('/')[-2]) == self.request.user.pk
